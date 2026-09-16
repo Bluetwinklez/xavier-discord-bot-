@@ -2,7 +2,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const dataDir = path.join(__dirname, '../../data');
+// Testler gerçek prod verisini (data/*.json) hiç görmesin/bozmasın diye BOT_DATA_DIR ortam
+// değişkeniyle geçici bir klasöre yönlendirilebilir; ayarlanmazsa davranış eskisiyle birebir aynı.
+const dataDir = process.env.BOT_DATA_DIR
+    ? path.resolve(process.env.BOT_DATA_DIR)
+    : path.join(__dirname, '../../data');
 
 function ensureDataDir() {
     if (!fs.existsSync(dataDir)) {

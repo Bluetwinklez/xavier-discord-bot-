@@ -353,6 +353,14 @@ module.exports = {
 
 Yeni bir özelliğin kalıcı veriye ihtiyacı varsa `src/utils/fileStore.js`'deki `readJSON(dosyaAdi, varsayilan)` / `writeJSON(dosyaAdi, veri)` yardımcılarını kullan — `data/<dosyaAdi>.json` içine atomik olarak yazar, ekstra bir veritabanı kurulumu gerekmez. Mevcut manager dosyaları (`economyManager.js`, `levelSystem.js`, `badgeManager.js` vb.) örnek alınabilir.
 
+### Test yazma
+
+```bash
+npm test
+```
+
+Node'un yerleşik test çalıştırıcısını (`node:test`, ekstra bağımlılık gerekmez) kullanır; `test/` altındaki `*.test.js` dosyalarını otomatik bulur. Testler gerçek `data/` klasörüne **asla dokunmaz** — her test dosyası, herhangi bir manager'ı require etmeden ÖNCE `process.env.BOT_DATA_DIR`'i geçici bir klasöre ayarlar (mevcut testlere bak: `test/economyManager.test.js` vb.). GitHub'a her push'ta `.github/workflows/ci.yml` bunu + tüm dosyaların syntax kontrolünü otomatik çalıştırır.
+
 ### Kod stili
 
 - Kullanıcıya dönen tüm metinler **Türkçe**.
@@ -370,3 +378,9 @@ Yeni bir özelliğin kalıcı veriye ihtiyacı varsa `src/utils/fileStore.js`'de
 | Müzik çalmıyor | `yt-dlp` sürümü güncel değilse bazı linkler başarısız olabilir; `bin/yt-dlp.exe`'yi güncelle. |
 | `/sesle-dinle` çalışmıyor | Konuşmayı yazıya çevirmek (STT) için `GROQ_API_KEY` veya `GEMINI_API_KEY` gerekir — ikisi de boşsa çalışmaz. |
 | AI hiç yanıt vermiyor | `.env`'de hiçbir AI sağlayıcı anahtarı girilmemiş olabilir (en az biri zorunlu) — `GEMINI_API_KEY` ile başlaman önerilir. |
+
+---
+
+## 📄 Lisans
+
+[MIT](LICENSE) — kodu özgürce kullanabilir, değiştirebilir ve dağıtabilirsin.
