@@ -29,7 +29,7 @@ Discord.js v14 üzerine kurulu, **100 slash komutlu**, tamamen Türkçe bir topl
 |---|---|
 | 🧠 **Yapay Zeka** | Doğal dille yönetim ("log kanalı aç", "otomodu aç", "sesi 50 yap" gibi cümlelerle), 9 farklı AI kişiliği, öğrenilebilir özel komut/bilgi, yetki devredilebilir "AI Yönetici Rolü", 9 sağlayıcılı otomatik fallback zinciri (biri çökerse/limitlenirse otomatik sıradakine geçer) |
 | 🛡️ **Moderasyon & Güvenlik** | ban/kick/timeout/uyarı sistemi + geçmiş, otomatik moderasyon (yasaklı kelime + leetspeak/boşluk atlatma koruması, davet linki engelleme, spam eşiği), Anti-Raid güvenlik kilidi, tam denetim log sistemi |
-| 🎨 **Kurulum & Temalar** | 7 hazır tema (Gaming, Yazılımcı, Chill, Anime, Ders, Tasarım, Müzik) tek komutla kurulur, AI'ye özel tema tasarlatma, kanalları silmeden yeniden düzenleme |
+| 🎨 **Kurulum & Temalar** | 10 hazır tema (Gaming, Yazılımcı, Chill, Anime, Ders, Tasarım, Müzik, Kripto, Spor, Roleplay) tek komutla kurulur, AI'ye özel tema tasarlatma, **resmi Discord sunucu şablonu linkini (discord.new/...) içe aktarma**, kanalları silmeden yeniden düzenleme |
 | 📈 **Topluluk & Ekonomi** | Mesaj bazlı XP/seviye sistemi, sunucu içi ekonomi (günlük ödül, çalışma, market, transfer), blackjack/slot/çarkıfelek (günlük seri bonuslu), davet takibi + ödülü, doğum günü kutlama, rozet/başarım sistemi (kazanınca otomatik bildirim) |
 | 🎵 **Müzik & Ses** | YouTube/Instagram/TikTok/Twitter gibi kaynaklardan çalma, kuyruk yönetimi, ses efekti (bassboost/nightcore), şarkı sözü gösterme, oy ile şarkı geçme, 5 canlı radyo istasyonu, metin-seslendirme (TTS), sesle-komut dinleme (STT), geçici ses odaları (Join to Create) |
 | 🎫 **Destek & Katılım** | Butonlu ticket sistemi (kapanışta otomatik transkript), kayıt sistemi (captcha doğrulamalı), self-rol menüsü, çekiliş sistemi, anonim itiraf kanalı, anket, mini kanal oyunları |
@@ -200,7 +200,7 @@ Kod değiştirdikten sonra (özellikle yeni komut eklediğinde) `npm run deploy`
 | `/starboard-kur` | Çok tepki alan mesajları öne çıkaran starboard sistemini kurar. |
 | `/sunucu-kur` | Sunucuyu Gaming temasına göre otomatik yapılandırır. |
 | `/tema-ai-olustur` | AI ile belirttiğiniz konuya göre sunucu kanal/rol tasarlar. |
-| `/tema-sec` | Hazır temaları listeler, önizler, onayla kurar. |
+| `/tema-sec` | Hazır temaları listeler, önizler, onayla kurar. `sablon-linki` opsiyonuyla bir Discord sunucu şablonu linki (`discord.new/...`) verirsen onu içe aktarır. |
 | `/timeout` | Kullanıcıya geçici susturma uygular. |
 | `/uyar` | Kullanıcıya resmi uyarı verir, geçmişine kaydeder. |
 | `/uyari-sil` | Bir kullanıcının belirli bir uyarısını siler. |

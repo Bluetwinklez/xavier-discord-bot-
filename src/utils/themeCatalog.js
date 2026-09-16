@@ -428,6 +428,162 @@ const THEMES = {
                 ]
             }
         ]
+    },
+    crypto: {
+        id: 'crypto',
+        name: '💰 Kripto & Borsa Topluluğu',
+        description: 'Coin analizleri, sinyal paylaşımı, portföy tartışması ve piyasa haberleri için tasarlanmış topluluk.',
+        color: 0xF7931A,
+        roles: [
+            { name: '👑 Kurucu', color: 0xF7931A, permissions: [PermissionFlagsBits.Administrator] },
+            { name: '🛡️ Moderatör', color: 0xE67E22, permissions: [PermissionFlagsBits.KickMembers, PermissionFlagsBits.BanMembers, PermissionFlagsBits.ManageMessages, PermissionFlagsBits.ModerateMembers] },
+            { name: '📊 Analist', color: 0x9B59B6 },
+            { name: '🐋 Balina (VIP)', color: 0x3498DB },
+            { name: '🟠 Bitcoin Maksi', color: 0xF7931A },
+            { name: '🔷 Altcoin Avcısı', color: 0x627EEA },
+            { name: '👥 Yatırımcı (Üye)', color: 0x2ECC71 }
+        ],
+        categories: [
+            {
+                name: '📢 │ BİLGİ & DUYURU',
+                channels: [
+                    { name: '📜│kurallar', type: ChannelType.GuildText, readonly: true },
+                    { name: '📢│duyurular', type: ChannelType.GuildText, readonly: true },
+                    { name: '⚠️│yatirim-tavsiyesi-degildir', type: ChannelType.GuildText, readonly: true },
+                    { name: '👋│hos-geldin', type: ChannelType.GuildText, readonly: true, isWelcome: true }
+                ]
+            },
+            {
+                name: '📊 │ PİYASA & ANALİZ',
+                channels: [
+                    { name: '💬│genel-sohbet', type: ChannelType.GuildText },
+                    { name: '📰│piyasa-haberleri', type: ChannelType.GuildText },
+                    { name: '📈│teknik-analiz', type: ChannelType.GuildText },
+                    { name: '🟠│bitcoin', type: ChannelType.GuildText },
+                    { name: '🔷│altcoinler', type: ChannelType.GuildText },
+                    { name: '💼│portfoy-paylasimi', type: ChannelType.GuildText }
+                ]
+            },
+            {
+                name: '🎫 │ DESTEK MERKEZİ',
+                isTicketCategory: true,
+                channels: [
+                    { name: '🎫│destek-talebi', type: ChannelType.GuildText, readonly: true, isTicket: true }
+                ]
+            },
+            {
+                name: '🔊 │ SES ODALARI',
+                channels: [
+                    { name: '➕ │ Oda Oluştur', type: ChannelType.GuildVoice, userLimit: 1, isTempHub: true },
+                    { name: '📊 │ Piyasa Sohbeti', type: ChannelType.GuildVoice },
+                    { name: '🎙️ │ Haftalık Analiz Yayını', type: ChannelType.GuildVoice },
+                    { name: '💤 │ AFK', type: ChannelType.GuildVoice }
+                ]
+            }
+        ]
+    },
+    sports: {
+        id: 'sports',
+        name: '⚽ Spor Topluluğu',
+        description: 'Maç günü sohbeti, transfer haberleri, fantezi lig ve takım bazlı tartışma kanalları.',
+        color: 0x27AE60,
+        roles: [
+            { name: '👑 Başkan', color: 0x27AE60, permissions: [PermissionFlagsBits.Administrator] },
+            { name: '🛡️ Hakem (Mod)', color: 0xE67E22, permissions: [PermissionFlagsBits.KickMembers, PermissionFlagsBits.ManageMessages, PermissionFlagsBits.ModerateMembers] },
+            { name: '⭐ Efsane (VIP)', color: 0xF1C40F },
+            { name: '⚽ Futbolsever', color: 0x2ECC71 },
+            { name: '🏀 Basketbolsever', color: 0xE67E22 },
+            { name: '🎮 Fantezi Lig Oyuncusu', color: 0x9B59B6 },
+            { name: '👥 Taraftar (Üye)', color: 0x3498DB }
+        ],
+        categories: [
+            {
+                name: '📢 │ BİLGİ & DUYURU',
+                channels: [
+                    { name: '📜│kurallar', type: ChannelType.GuildText, readonly: true },
+                    { name: '📢│duyurular', type: ChannelType.GuildText, readonly: true },
+                    { name: '👋│hos-geldin', type: ChannelType.GuildText, readonly: true, isWelcome: true }
+                ]
+            },
+            {
+                name: '⚽ │ MAÇ GÜNÜ',
+                channels: [
+                    { name: '💬│genel-sohbet', type: ChannelType.GuildText },
+                    { name: '📅│mac-programi', type: ChannelType.GuildText },
+                    { name: '🔄│transfer-haberleri', type: ChannelType.GuildText },
+                    { name: '🎮│fantezi-lig', type: ChannelType.GuildText },
+                    { name: '📸│goller-ve-klipler', type: ChannelType.GuildText }
+                ]
+            },
+            {
+                name: '🎫 │ DESTEK & ÖNERİ',
+                isTicketCategory: true,
+                channels: [
+                    { name: '🎫│destek-talebi', type: ChannelType.GuildText, readonly: true, isTicket: true }
+                ]
+            },
+            {
+                name: '🔊 │ TRİBÜN (SES)',
+                channels: [
+                    { name: '➕ │ Oda Oluştur', type: ChannelType.GuildVoice, userLimit: 1, isTempHub: true },
+                    { name: '🎙️ │ Maç Anlatımı', type: ChannelType.GuildVoice },
+                    { name: '🔊 │ Tribün Sohbeti 1', type: ChannelType.GuildVoice },
+                    { name: '🔊 │ Tribün Sohbeti 2', type: ChannelType.GuildVoice },
+                    { name: '💤 │ AFK', type: ChannelType.GuildVoice }
+                ]
+            }
+        ]
+    },
+    roleplay: {
+        id: 'roleplay',
+        name: '🐉 Roleplay & Fantezi Topluluğu',
+        description: 'Karakter oluşturma, hikaye anlatımı, lore paylaşımı ve canlı rol yapma seansları için kurulmuş topluluk.',
+        color: 0x8E44AD,
+        roles: [
+            { name: '👑 Dünya Ustası (Admin)', color: 0x8E44AD, permissions: [PermissionFlagsBits.Administrator] },
+            { name: '🛡️ Anlatıcı (Mod)', color: 0xE67E22, permissions: [PermissionFlagsBits.KickMembers, PermissionFlagsBits.ManageMessages, PermissionFlagsBits.ModerateMembers] },
+            { name: '🌟 Usta Oyuncu (VIP)', color: 0xF1C40F },
+            { name: '🐉 Ejderha Klanı', color: 0xE74C3C },
+            { name: '🧝 Elf Klanı', color: 0x2ECC71 },
+            { name: '🗡️ Maceracı (Üye)', color: 0x3498DB }
+        ],
+        categories: [
+            {
+                name: '📜 │ LORE & KURALLAR',
+                channels: [
+                    { name: '📜│kurallar', type: ChannelType.GuildText, readonly: true },
+                    { name: '📖│dunya-lore', type: ChannelType.GuildText, readonly: true },
+                    { name: '📢│duyurular', type: ChannelType.GuildText, readonly: true },
+                    { name: '👋│hos-geldin-maceraci', type: ChannelType.GuildText, readonly: true, isWelcome: true }
+                ]
+            },
+            {
+                name: '⚔️ │ HİKAYE & SOHBET',
+                channels: [
+                    { name: '💬│ooc-genel-sohbet', type: ChannelType.GuildText },
+                    { name: '🧙│karakter-olustur', type: ChannelType.GuildText },
+                    { name: '📖│hikaye-anlatimi-ic', type: ChannelType.GuildText },
+                    { name: '🎨│karakter-sanati', type: ChannelType.GuildText }
+                ]
+            },
+            {
+                name: '🎫 │ DESTEK MERKEZİ',
+                isTicketCategory: true,
+                channels: [
+                    { name: '🎫│destek-talebi', type: ChannelType.GuildText, readonly: true, isTicket: true }
+                ]
+            },
+            {
+                name: '🔊 │ MACERA ODALARI (SES)',
+                channels: [
+                    { name: '➕ │ Oda Oluştur', type: ChannelType.GuildVoice, userLimit: 1, isTempHub: true },
+                    { name: '🎭 │ Canlı RP Seansı 1', type: ChannelType.GuildVoice },
+                    { name: '🎭 │ Canlı RP Seansı 2', type: ChannelType.GuildVoice },
+                    { name: '🎲 │ Masaüstü Oyun Masası', type: ChannelType.GuildVoice, userLimit: 6 },
+                    { name: '💤 │ AFK', type: ChannelType.GuildVoice }
+                ]
+            }
+        ]
     }
 };
 
