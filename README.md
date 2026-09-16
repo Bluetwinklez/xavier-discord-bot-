@@ -68,6 +68,18 @@ Müzik sistemini ana bottan bağımsız çalıştırmak istersen (böylece ana b
 
 ### 3. Yapılandırma (.env)
 
+**En kolay yol — kurulum sihirbazı:**
+
+```bash
+npm install
+npm run setup
+```
+
+`npm run setup`, her ayarı (Discord token'ından AI anahtarlarına kadar) sırayla sorar ve cevapladıkça **otomatik olarak `.env` dosyasına yazar** — hiçbir dosyayı elle açıp düzenlemen gerekmez. Zorunlu olmayan her şeyi (AI anahtarları, Fish Audio, ikinci bot vb.) boş geçip sadece Enter'a basabilirsin, istediğin zaman `npm run setup`'ı tekrar çalıştırıp sadece eksik/yeni alanları doldurabilirsin — daha önce girdiğin değerler korunur (Enter'a basmak mevcut değeri değiştirmeden bırakır).
+
+<details>
+<summary><b>Alternatif: .env dosyasını elle doldurmak</b></summary>
+
 Proje kökünde `.env.example` dosyasını `.env` olarak kopyala ve doldur:
 
 ```env
@@ -103,14 +115,15 @@ FISHAUDIO_API_KEY=
 EDGE_TTS_VOICE=tr-TR-AhmetNeural
 ```
 
-> `GUILD_ID` ayarlanmazsa komutlar **global** kaydedilir ve Discord'da görünmesi saatler sürebilir. Test/geliştirme sırasında `GUILD_ID` ayarlaman şiddetle önerilir.
+</details>
+
+> `GUILD_ID` ayarlanmazsa komutlar **global** kaydedilir ve Discord'da görünmesi saatler sürebilir. Test/geliştirme sırasında `GUILD_ID` ayarlaman şiddetle önerilir (kurulum sihirbazı da bunu sorar).
 
 > ⚠️ **`.env` dosyanı asla paylaşma veya bir Git deposuna ekleme.** Bu depo `.gitignore` ile `.env`'i, `data/` klasörünü (kullanıcı verileri) ve `logs/`'u zaten dışarıda tutuyor — public bir repoya yüklerken hiçbir token/anahtar/kullanıcı verisi gitmez.
 
 ### 4. Başlatma
 
 ```bash
-npm install
 npm run deploy   # Slash komutlarını Discord'a yükler
 npm start        # Botu (veya botları) başlatır
 ```
