@@ -8,6 +8,7 @@ const {
     StreamType
 } = require('@discordjs/voice');
 const { Readable } = require('stream');
+const { MsEdgeTTS, OUTPUT_FORMAT } = require('msedge-tts');
 const logger = require('./logger');
 
 // Fish Audio ile seslendirme dener; yanıt gövdesini TAMAMEN indirmeden (arrayBuffer beklemeden)
@@ -41,6 +42,21 @@ async function fetchFishAudioTTS(text) {
         return Readable.fromWeb(res.body);
     } catch (err) {
         console.warn('Fish Audio TTS hatası:', err.message);
+        return null;
+    }
+}
+
+// Microsoft Edge'in "Sesli Oku" motorunu kullanır — API anahtarı GEREKMEZ, kaliteli Türkçe nöral ses
+// üretir. Fish Audio anahtarı yoksa (veya isteği başarısız olursa) Google Translate'in resmi olmayan,
+// 200 karakterle sınırlı ve kırılgan uç noktasına düşmeden önce bu devreye giriyor.
+async function fetchEdgeTTS(text) {
+    try {
+        const tts = new MsEdgeTTS();
+        await tts.setMetadata(process.env.EDGE_TTS_VOICE || 'tr-TR-AhmetNeural', OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3);
+        const { audioStream } = tts.toStream(text.slice(0, 500));
+        return audioStream;
+    } catch (err) {
+        console.warn('Edge TTS hatası:', err.message);
         return null;
     }
 }
@@ -177,7 +193,10 @@ async function playRadio(voiceChannel, stationKey) {
 async function playTTS(voiceChannel, text) {
     const session = await connectToVoice(voiceChannel, false);
 
+    // 3 katmanlı TTS: Fish Audio (anahtarlıysa, en iyi kalite/klonlama) -> Edge TTS (anahtarsız,
+    // kaliteli nöral ses) -> Google Translate (son çare, resmi olmayan ve kırılgan).
     const fishAudioStream = await fetchFishAudioTTS(text);
+    const edgeStream = fishAudioStream ? null : await fetchEdgeTTS(text);
 
     let resource;
     if (fishAudioStream) {
@@ -186,9 +205,15 @@ async function playTTS(voiceChannel, text) {
             inlineVolume: true
         });
         logger.info('[TTS] Fish Audio akışı (stream) çalınıyor.');
+    } else if (edgeStream) {
+        resource = createAudioResource(edgeStream, {
+            inputType: StreamType.Arbitrary,
+            inlineVolume: true
+        });
+        logger.info('[TTS] Edge TTS akışı çalınıyor.');
     } else {
-        // Fish Audio anahtarı yoksa veya istek başarısız olduysa eski (resmi olmayan) yönteme düş
-        logger.warn('[TTS] Fish Audio kullanılamadı, Google Translate TTS yedeğine düşülüyor.');
+        // Fish Audio ve Edge TTS ikisi de kullanılamadıysa eski (resmi olmayan) yönteme düş
+        logger.warn('[TTS] Fish Audio ve Edge TTS kullanılamadı, Google Translate TTS yedeğine düşülüyor.');
         const cleanText = encodeURIComponent(text.slice(0, 200));
         const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${cleanText}&tl=tr&client=tw-ob`;
         resource = createAudioResource(ttsUrl, { inlineVolume: true });

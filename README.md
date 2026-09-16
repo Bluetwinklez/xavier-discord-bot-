@@ -42,7 +42,8 @@ Discord.js v14 üzerine kurulu, **100 slash komutlu**, tamamen Türkçe bir topl
 
 - **Node.js** v18 veya üstü (test edilen sürüm: v24)
 - **Discord Developer Portal** hesabı
-- (Opsiyonel) **Fish Audio API anahtarı** — TTS ve sesle-komut (STT) için
+- (Opsiyonel) **Fish Audio API anahtarı** — en iyi TTS kalitesi için (yoksa ücretsiz Edge TTS otomatik devreye girer)
+- (Opsiyonel) **Groq veya Gemini API anahtarı** — sesle-komut (STT, `/sesle-dinle`) için
 - (Opsiyonel) **İkinci bir Discord bot token'ı** — müziği ana bottan ayrı çalıştırmak için
 - (Opsiyonel) En az bir **AI sağlayıcı API anahtarı** (Gemini önerilir, ücretsiz kotası var) — yapay zeka katmanı için
 
@@ -83,14 +84,23 @@ MUSIC_BOT_CLIENT_ID=IKINCI_BOT_CLIENT_ID
 # 🧠 AI sağlayıcıları (en az biri gerekli — Gemini önerilir, ücretsiz kotası var)
 GEMINI_API_KEY=
 GROQ_API_KEY=
-OPENROUTER_API_KEY=
+MISTRAL_API_KEY=
+ZHIPUAI_API_KEY=
 DEEPSEEK_API_KEY=
+SAMBANOVA_API_KEY=
+CEREBRAS_API_KEY=
+OPENROUTER_API_KEY=
 OPENCLAW_BASE_URL=http://127.0.0.1:18789/v1
 OPENCLAW_API_KEY=
 
-# 🐟 Fish Audio (opsiyonel) — TTS ve sesle-komut (STT) için. Boşsa TTS resmi olmayan
-# Google Translate yöntemine düşer, sesle-komut (/sesle-dinle) çalışmaz.
+# 🐟 Fish Audio (opsiyonel) — en iyi kalite/ses klonlama. Boşsa otomatik olarak ücretsiz Edge TTS'e
+# düşer (aşağıda). Sesle-komut (STT, /sesle-dinle) Fish Audio'yu DEĞİL, GROQ_API_KEY (Whisper) veya
+# GEMINI_API_KEY'i kullanır — ikisi de yukarıdaki AI bölümünde.
 FISHAUDIO_API_KEY=
+
+# 🗣️ Edge TTS (opsiyonel) — Microsoft'un ücretsiz, anahtarsız, kaliteli nöral Türkçe TTS motoru.
+# Fish Audio yoksa otomatik devreye girer, hiçbir ek kurulum gerekmez.
+EDGE_TTS_VOICE=tr-TR-AhmetNeural
 ```
 
 > `GUILD_ID` ayarlanmazsa komutlar **global** kaydedilir ve Discord'da görünmesi saatler sürebilir. Test/geliştirme sırasında `GUILD_ID` ayarlaman şiddetle önerilir.
@@ -213,7 +223,7 @@ Kod değiştirdikten sonra (özellikle yeni komut eklediğinde) `npm run deploy`
 | `/oda-kilit` | Geçici odanızı kilitler/açar. |
 | `/oda-limit` | Geçici ses odanızın kişi sınırını ayarlar. |
 | `/radyo` | Canlı radyo (PowerTürk, Fenomen, SlowTürk, Best FM) veya 7/24 Lofi yayını başlatır. |
-| `/sesle-dinle` | **(Fish Audio gerekir)** Konuşmanızı dinleyip AI'ye işlettirir, yanıtı seste okur. |
+| `/sesle-dinle` | **(GROQ_API_KEY veya GEMINI_API_KEY gerekir)** Konuşmanızı dinleyip AI'ye işlettirir, yanıtı seste okur. |
 | `/sesle-dinle-durdur` | Sesle komut dinlemeyi durdurur. |
 | `/seslendir` | Yazdığınız metni ses kanalında seslendirir (TTS). |
 | `/seste-kal` | Botu seçilen kanala 7/24 bağlar. |
@@ -262,7 +272,9 @@ AI kanalında yazarak veya botu etiketleyerek her şeyi doğal dille (Türkçe) 
 
 ### Sağlayıcı Zinciri
 
-`aiManager.js`, tek bir sağlayıcıya bağımlı kalmamak için sırayla dener: Gemini → Groq → Mistral → ZhipuAI → Groq (2.) → DeepSeek → SambaNova → OpenRouter → OpenClaw (yerel). Biri hata verir/limitlenirse otomatik sıradakine düşer, kullanıcı hiçbir şey fark etmez.
+`aiManager.js`, tek bir sağlayıcıya bağımlı kalmamak için sırayla dener: OpenClaw (yerel) → Gemini → Groq → Mistral → ZhipuAI → Groq (2.) → OpenClaw (2.) → DeepSeek → SambaNova → Cerebras → OpenRouter. Biri hata verir/limitlenirse otomatik sıradakine düşer, kullanıcı hiçbir şey fark etmez. Hepsi opsiyonel ve `.env`'de anahtarı olmayanlar otomatik atlanır — sadece Gemini'yi (ücretsiz kotalı) kurmak bile yeterlidir, geri kalanı istersen dayanıklılık için sonradan ekleyebilirsin.
+
+**Ek olarak eklenebilecek başka ücretsiz/ucuz sağlayıcılar** (henüz kodlanmadı, istenirse aynı desenle eklenir): [Cohere](https://cohere.com) (ücretsiz deneme katmanı, OpenAI-uyumlu `/compatibility/v1/chat/completions` ucu var), [Together AI](https://together.ai) (yeni hesaplara ücretsiz kredi), [Google AI Studio içindeki diğer Gemini modelleri](https://aistudio.google.com) (aynı `GEMINI_API_KEY` ile farklı model adı denenebilir).
 
 ### Kişilik Modları
 
@@ -343,5 +355,5 @@ Yeni bir özelliğin kalıcı veriye ihtiyacı varsa `src/utils/fileStore.js`'de
 | Slash komutları sunucuda görünmüyor | `npm run deploy` çalıştırılmamış, ya da bot `applications.commands` scope'u olmadan davet edilmiş — botu yeniden davet et. |
 | Global komutlar geç görünüyor | Global kayıt Discord tarafında saatler sürebilir; test için `.env`'e `GUILD_ID` ekleyip tekrar deploy et (anında yüklenir). |
 | Müzik çalmıyor | `yt-dlp` sürümü güncel değilse bazı linkler başarısız olabilir; `bin/yt-dlp.exe`'yi güncelle. |
-| `/sesle-dinle` çalışmıyor | `FISHAUDIO_API_KEY` boşsa bu özellik devre dışı kalır — Fish Audio'dan anahtar al. |
+| `/sesle-dinle` çalışmıyor | Konuşmayı yazıya çevirmek (STT) için `GROQ_API_KEY` veya `GEMINI_API_KEY` gerekir — ikisi de boşsa çalışmaz. |
 | AI hiç yanıt vermiyor | `.env`'de hiçbir AI sağlayıcı anahtarı girilmemiş olabilir (en az biri zorunlu) — `GEMINI_API_KEY` ile başlaman önerilir. |

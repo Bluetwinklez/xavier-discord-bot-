@@ -132,6 +132,7 @@ async function callAIProviders(messages, keys = {}, isVoice = false) {
     const zhipuaiKey = process.env.ZHIPUAI_API_KEY;
     const deepseekKey = process.env.DEEPSEEK_API_KEY;
     const sambanovaKey = process.env.SAMBANOVA_API_KEY;
+    const cerebrasKey = process.env.CEREBRAS_API_KEY;
     const openrouterKey = keys.openrouterKey || process.env.OPENROUTER_API_KEY;
     const isVoicePrompt = isVoice || messages.some(m => typeof m.content === 'string' && m.content.includes('CANLI SESLİ'));
 
@@ -420,7 +421,32 @@ async function callAIProviders(messages, keys = {}, isVoice = false) {
         } catch (err) {}
     }
 
-    // 8. OpenRouter
+    // 8. Cerebras (ücretsiz katmanı olan, çok hızlı bir çıkarım motoru)
+    if (!rawReply && cerebrasKey) {
+        try {
+            const res = await fetch('https://api.cerebras.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${cerebrasKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'llama-3.3-70b',
+                    messages: messages,
+                    temperature: 0.7,
+                    max_tokens: 1000
+                })
+            });
+            if (res.ok) {
+                const data = await res.json();
+                rawReply = data.choices?.[0]?.message?.content;
+            }
+        } catch (err) {
+            console.error('Cerebras Hatası:', err.message);
+        }
+    }
+
+    // 9. OpenRouter
     if (!rawReply && openrouterKey) {
         try {
             const orRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
