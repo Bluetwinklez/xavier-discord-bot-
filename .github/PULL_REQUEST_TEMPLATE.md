@@ -13,3 +13,4 @@
 - [ ] Kullanıcıya dönen metinler Türkçe
 - [ ] Yeni bir top-level komut eklemedim (veya eklediysem 100 komut sınırını göz önünde bulundurdum — bkz. [CONTRIBUTING.md](../CONTRIBUTING.md))
 - [ ] `.env`, gerçek token/anahtar veya `data/` içeriği bu PR'a dahil değil
+- [ ] Kullanıcının fark edeceği bir değişiklikse [CHANGELOG.md](../CHANGELOG.md)'nin "Yayınlanmamış" bölümüne ekledim

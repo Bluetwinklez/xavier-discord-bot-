@@ -26,6 +26,7 @@ Discord.js v14 üzerine kurulu, **100 slash komutlu**, tamamen Türkçe bir topl
 - [Mimari Notları](#️-mimari-notları)
 - [Katkıda Bulunma / Bota Yeni Özellik Ekleme](#-katkıda-bulunma--bota-yeni-özellik-ekleme)
 - [Sorun Giderme](#-sorun-giderme)
+- [Sürüm Geçmişi](#-sürüm-geçmişi)
 
 ---
 
@@ -390,3 +391,7 @@ Node'un yerleşik test çalıştırıcısını (`node:test`, ekstra bağımlıl�
 ## 📄 Lisans
 
 [MIT](LICENSE) — kodu özgürce kullanabilir, değiştirebilir ve dağıtabilirsin.
+
+## 📝 Sürüm Geçmişi
+
+Bkz. [CHANGELOG.md](CHANGELOG.md). Sürümleme [Semantic Versioning](https://semver.org/lang/tr/) kurallarını izler.
