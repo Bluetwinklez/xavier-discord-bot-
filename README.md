@@ -318,7 +318,7 @@ AI kanalında yazarak veya botu etiketleyerek her şeyi doğal dille (Türkçe) 
 
 ## 🤝 Katkıda Bulunma / Bota Yeni Özellik Ekleme
 
-Proje, yeni özellik eklemeyi kolaylaştıracak şekilde tasarlandı — merkezi bir "komut listesi" dosyası **yok**, her şey klasör taraması ile otomatik bulunuyor. Fork/branch/PR akışı için [CONTRIBUTING.md](CONTRIBUTING.md)'ye, topluluk kurallarımız için [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)'ye bak.
+Proje, yeni özellik eklemeyi kolaylaştıracak şekilde tasarlandı — merkezi bir "komut listesi" dosyası **yok**, her şey klasör taraması ile otomatik bulunuyor. Fork/branch/PR akışı için [CONTRIBUTING.md](CONTRIBUTING.md)'ye, topluluk kurallarımız için [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)'ye, güvenlik açığı bildirimi için [SECURITY.md](SECURITY.md)'ye bak.
 
 ### Yeni bir slash komutu eklemek
 
