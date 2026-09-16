@@ -1,0 +1,22 @@
+name: ✨ Özellik İsteği
+description: Yeni bir özellik veya iyileştirme öner
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Hangi ihtiyacı çözüyor?
+      description: Şu an botta eksik olan veya sizi zorlayan şey ne?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Nasıl çalışmasını istersin?
+      description: Bir slash komutu mu, mevcut bir komuta yeni bir alt komut mu, AI aksiyonu mu?
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Düşündüğün başka bir yol var mı?

@@ -1,5 +1,11 @@
 # 🤖 Xavier — Çok İşlevli Discord Botu
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/Bluetwinklez/xavier-discord-bot-/actions/workflows/ci.yml/badge.svg)](https://github.com/Bluetwinklez/xavier-discord-bot-/actions/workflows/ci.yml)
+[![Node.js](https://img.shields.io/badge/Node.js-v18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?logo=discord&logoColor=white)](https://discord.js.org)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 Discord.js v14 üzerine kurulu, **100 slash komutlu**, tamamen Türkçe bir topluluk botu. Moderasyon, otomod, log sistemi, kayıt/karşılama, seviye/ekonomi/çekiliş/self-rol, hazır sunucu temaları, ticket sistemi, tam müzik + canlı radyo + TTS + sesle-komut, sunucu yedekleme ve **doğal dille (Türkçe) komut verilebilen bir yapay zeka katmanı** içerir.
 
 > Bu proje kişisel/topluluk kullanımı için geliştirildi. Kodu inceleyip kendi sunucun için kurabilir, dallandırabilir veya üstüne yeni özellik ekleyebilirsin — aşağıda [Katkıda Bulunma / Bota Yeni Özellik Ekleme](#-katkıda-bulunma--bota-yeni-özellik-ekleme) bölümünde mimari buna nasıl izin verdiği anlatılıyor.
@@ -312,7 +318,7 @@ AI kanalında yazarak veya botu etiketleyerek her şeyi doğal dille (Türkçe) 
 
 ## 🤝 Katkıda Bulunma / Bota Yeni Özellik Ekleme
 
-Proje, yeni özellik eklemeyi kolaylaştıracak şekilde tasarlandı — merkezi bir "komut listesi" dosyası **yok**, her şey klasör taraması ile otomatik bulunuyor.
+Proje, yeni özellik eklemeyi kolaylaştıracak şekilde tasarlandı — merkezi bir "komut listesi" dosyası **yok**, her şey klasör taraması ile otomatik bulunuyor. Fork/branch/PR akışı için [CONTRIBUTING.md](CONTRIBUTING.md)'ye, topluluk kurallarımız için [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)'ye bak.
 
 ### Yeni bir slash komutu eklemek
 

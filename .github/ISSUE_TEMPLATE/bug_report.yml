@@ -1,0 +1,32 @@
+name: 🐛 Hata Bildirimi
+description: Botta karşılaştığın bir hatayı bildir
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Ne oldu?
+      description: Ne yapmaya çalışıyordun, ne bekliyordun, gerçekte ne oldu?
+      placeholder: "/market satin-al komutunu çalıştırdım ama bot hiç yanıt vermedi..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Hata logu (varsa)
+      description: "`logs/YYYY-MM-DD.log` dosyasındaki ilgili satırlar veya konsol çıktısı"
+      render: shell
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js sürümü
+      placeholder: "node -v ile öğrenebilirsin"
+
+  - type: textarea
+    id: env
+    attributes:
+      label: Hangi özellikler aktifti?
+      description: ".env'de hangi opsiyonel anahtarları (AI sağlayıcıları, Fish Audio, ikinci müzik botu vb.) ayarlamıştın? Değerleri PAYLAŞMA, sadece hangilerinin dolu olduğunu belirt."
+      placeholder: "GEMINI_API_KEY dolu, MUSIC_BOT_TOKEN boş, ..."
